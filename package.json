@@ -1,0 +1,47 @@
+{
+  "name": "seeds-esr-util",
+  "version": "1.0.0",
+  "description": "Utility for encoding and decoding ESR; as well as for generating ESR QR codes",
+  "source": "src/main.js",
+  "main": "./dist/main.js",
+  "module": "./dist/main.module.js",
+  "unpkg": "./dist/main.umd.js",
+  "exports": {
+    "require": "./dist/main.cjs",
+    "default": "./dist/main.modern.js"
+  },
+  "scripts": {
+    "build": "NODE_OPTIONS=--experimental-vm-modules microbundle",
+    "dev": "NODE_OPTIONS=--experimental-vm-modules microbundle watch",
+    "test": "NODE_OPTIONS=--experimental-vm-modules npx jest",
+    "test:dev": "NODE_OPTIONS=--experimental-vm-modules npx jest --watch",
+    "prepublish": "./offline/offline-npm --prepublish ; ",
+    "preinstall": "./offline/offline-npm --preinstall & sleep 2 ; ",
+    "postinstall": "./offline/offline-npm --postinstall ; "
+  },
+  "jest": {
+    "transform": {}
+  },
+  "keywords": [
+    "esr",
+    "eosio",
+    "signing",
+    "request",
+    "library",
+    "code"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "eosio-signing-request": "^2.4.0",
+    "eosjs": "^22.1.0",
+    "jest": "^27.5.1",
+    "node-fetch": "^2.6.7",
+    "util": "^0.12.4",
+    "zlib": "^1.0.5"
+  },
+  "devDependencies": {
+    "babel-jest": "^27.4.6",
+    "microbundle": "^0.14.2"
+  }
+}
