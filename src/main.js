@@ -1,10 +1,10 @@
-const { SigningRequest } = require("eosio-signing-request");
-const { Api, JsonRpc } = require("eosjs");
-const fetch = require("node-fetch");
-const util = require("util");
-const zlib = require("zlib");
+import { SigningRequest } from "eosio-signing-request";
+import { Api, JsonRpc } from "eosjs";
+import util from "util";
+import zlib from "zlib";
 
-const DEFAULT_RPC_ENDPOINT = "https://test.hypha.earth";
+import { DEFAULT_RPC_ENDPOINT } from "./config";
+
 const textEncoder = new util.TextEncoder();
 const textDecoder = new util.TextDecoder();
 
@@ -27,7 +27,7 @@ const getOpts = async (api) => {
 };
 
 class ESRUtil {
-  constructor(rpcEndpoint) {
+  constructor(rpcEndpoint, fetch) {
     const rpc = new JsonRpc(rpcEndpoint || DEFAULT_RPC_ENDPOINT, { fetch });
     const api = new Api({
       rpc,
@@ -63,4 +63,4 @@ class ESRUtil {
   };
 }
 
-module.exports = ESRUtil;
+export default ESRUtil;

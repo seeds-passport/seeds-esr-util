@@ -1,4 +1,4 @@
-const ESRUtil = require("./main");
+import ESRUtil from "./main";
 
 const esrUtil = new ESRUtil();
 const TEST_REQUEST_DATA = {};

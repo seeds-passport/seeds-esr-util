@@ -1,23 +1,23 @@
 {
-  "name": "seeds-esr-util",
+  "name": "@seeds-passport/seeds-esr-util",
   "version": "1.0.0",
-  "description": "Utility for encoding and decoding ESR; as well as for generating ESR QR codes",
-  "source": "src/main.js",
-  "main": "./dist/main.js",
-  "module": "./dist/main.module.js",
-  "unpkg": "./dist/main.umd.js",
-  "exports": {
-    "require": "./dist/main.cjs",
-    "default": "./dist/main.modern.js"
+  "description": "Utility for encoding and decoding ESR",
+  "repository": "https://github.com/seeds-passport/seeds-esr-util",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   },
+  "type": "module",
+  "source": "src/main.js",
+  "files": [
+    "src",
+    "dist"
+  ],
   "scripts": {
-    "build": "NODE_OPTIONS=--experimental-vm-modules microbundle",
-    "dev": "NODE_OPTIONS=--experimental-vm-modules microbundle watch",
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
     "test": "NODE_OPTIONS=--experimental-vm-modules npx jest",
     "test:dev": "NODE_OPTIONS=--experimental-vm-modules npx jest --watch",
-    "prepublish": "./offline/offline-npm --prepublish ; ",
-    "preinstall": "./offline/offline-npm --preinstall & sleep 2 ; ",
-    "postinstall": "./offline/offline-npm --postinstall ; "
+    "prepare": "npm run build"
   },
   "jest": {
     "transform": {}
@@ -32,16 +32,18 @@
   ],
   "author": "",
   "license": "ISC",
-  "dependencies": {
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^21.0.3",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^13.1.3",
+    "babel-jest": "^27.4.6",
     "eosio-signing-request": "^2.4.0",
     "eosjs": "^22.1.0",
     "jest": "^27.5.1",
     "node-fetch": "^2.6.7",
+    "rollup": "^2.70.1",
+    "rollup-plugin-terser": "^7.0.2",
     "util": "^0.12.4",
     "zlib": "^1.0.5"
-  },
-  "devDependencies": {
-    "babel-jest": "^27.4.6",
-    "microbundle": "^0.14.2"
   }
 }
