@@ -68,4 +68,4 @@ class ESRUtil {
   };
 }
 
-export { ESRUtil };
+export default ESRUtil;
