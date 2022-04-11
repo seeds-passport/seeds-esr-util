@@ -1,6 +1,6 @@
 {
   "name": "@seeds-passport/seeds-esr-util",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Utility for encoding and decoding ESR",
   "repository": "https://github.com/seeds-passport/seeds-esr-util",
   "publishConfig": {
@@ -13,7 +13,7 @@
   "files": [
     "src",
     "dist",
-    "rollup.config.json"
+    "rollup.config.js"
   ],
   "scripts": {
     "build": "rollup -c",
