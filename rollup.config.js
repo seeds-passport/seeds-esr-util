@@ -1,6 +1,8 @@
 import { nodeResolve } from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import importJson from "@rollup/plugin-json";
+import inject from "@rollup/plugin-inject";
+import nodePolyfills from "rollup-plugin-polyfill-node";
 import { terser } from "rollup-plugin-terser";
 
 const devMode = process.env.NODE_ENV === "development";
@@ -8,7 +10,18 @@ console.log(`${devMode ? "development" : "production"} mode bundle`);
 
 const pluginName = "SeedsEsrUtil";
 const input = "./src/main.js";
-const plugins = [nodeResolve(), commonjs(), terser(), importJson()];
+const plugins = [
+  inject({
+    fetch: ["node-fetch", "fetch"],
+    util: ["util", "*"],
+    zlib: ["zlib", "*"],
+    Buffer: ["buffer", "Buffer"],
+  }),
+  nodePolyfills(),
+  nodeResolve({ preferBuiltins: false }),
+  terser(),
+  importJson(),
+];
 const getOutput = ({
   format,
   extension = "js",
@@ -39,32 +52,33 @@ const getOutput = ({
 export default [
   // ES bundle
   {
+    external: ["eosio-signing-request", "eosjs"],
     input,
     plugins,
     output: getOutput({ format: "es" }),
   },
   // IIFE bundle
-  {
-    input,
-    plugins,
-    output: getOutput({ format: "iife" }),
-  },
+  // {
+  //   input,
+  //   plugins,
+  //   output: getOutput({ format: "iife" }),
+  // },
   // UMD bundle
-  {
-    input,
-    plugins,
-    output: getOutput({ format: "umd", name: pluginName }),
-  },
+  // {
+  //   input,
+  //   plugins,
+  //   output: getOutput({ format: "umd", name: pluginName }),
+  // },
   // CommonJS bundle
-  {
-    input,
-    plugins,
-    output: getOutput({ format: "cjs", extension: "cjs" }),
-  },
+  // {
+  //   input,
+  //   plugins,
+  //   output: getOutput({ format: "cjs" }),
+  // },
   // AMD bundle
-  {
-    input,
-    plugins,
-    output: getOutput({ format: "amd" }),
-  },
+  // {
+  //   input,
+  //   plugins,
+  //   output: getOutput({ format: "amd" }),
+  // },
 ];
